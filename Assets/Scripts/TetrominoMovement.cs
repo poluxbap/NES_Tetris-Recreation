@@ -6,7 +6,7 @@ public class TetrominoMovement : MonoBehaviour
 {
     public Vector3 rotationPoint;
     public float previusTime;
-    public float fallTime = .5f;
+    public float fallTime = .8f;
     public static int width = 10;
     public static int height = 20;
 
@@ -52,12 +52,19 @@ public class TetrominoMovement : MonoBehaviour
             transform.position += new Vector3(0, -1, 0);
             if (!ValidMove())
             {
-                transform.position += new Vector3(0, 1, 0);
-                AddToGrid();
-                CheckForLines();
-
-                this.enabled = false;
-                FindObjectOfType<Spawn>().NewTetromino();
+                if (GameEnded())
+                {
+                   FindObjectOfType<LoseScreen>().CloseBlinds();
+                    this.enabled = false;
+                }
+                else
+                {
+                    FindObjectOfType<Spawn>().NewTetromino();
+                    transform.position += new Vector3(0, 1, 0);
+                    this.enabled = false;
+                    AddToGrid();
+                    CheckForLines();
+                }
             }
 
             previusTime = Time.time;
@@ -132,11 +139,11 @@ public class TetrominoMovement : MonoBehaviour
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
 
-            if (roundedX < 0  || roundedX >= width || roundedY < 0 || roundedY >= height)
+            if(roundedX < 0  || roundedX >= width || roundedY < 0 || roundedY > height - 2)
             {
                 return false;
             }
-            
+
             if(_grid[roundedX, roundedY] != null)
             {
                 return false;
@@ -144,5 +151,20 @@ public class TetrominoMovement : MonoBehaviour
         }
 
         return true;
+    }
+
+    bool GameEnded()
+    {
+        foreach (Transform children in transform)
+        {
+            int roundedY = Mathf.RoundToInt(children.transform.position.y);
+
+            if (roundedY >= height - 2)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

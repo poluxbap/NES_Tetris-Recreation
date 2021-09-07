@@ -6,8 +6,9 @@ public class Spawn : MonoBehaviour
 {
     public List<GameObject> tetrominoes;
     public Transform previewPosition;
+    public SO_TetrominoCount statistics;
 
-    private GameObject _nextTetromino;
+    private int _nextTetromino;
     private GameObject _previewTetromino;
 
     void Start()
@@ -18,7 +19,10 @@ public class Spawn : MonoBehaviour
 
     public void NewTetromino()
     {
-        Instantiate(_nextTetromino, transform.position, Quaternion.identity);
+        Instantiate(tetrominoes[_nextTetromino], transform.position, Quaternion.identity);
+
+        statistics.tetrominosList[_nextTetromino]++;
+
         PreviewTetromino();
     }
 
@@ -26,11 +30,11 @@ public class Spawn : MonoBehaviour
     {
         Destroy(_previewTetromino);
 
-        _nextTetromino = tetrominoes[Random.Range(0, tetrominoes.Count)];
-        _previewTetromino = Instantiate(_nextTetromino, transform.position, Quaternion.identity);
+        _nextTetromino = Random.Range(0, tetrominoes.Count);
+        _previewTetromino = Instantiate(tetrominoes[_nextTetromino], transform.position, Quaternion.identity);
 
         Destroy(_previewTetromino.GetComponent<TetrominoMovement>());
 
-        _previewTetromino.transform.position = previewPosition.position;
+        _previewTetromino.transform.position = previewPosition.position - _previewTetromino.GetComponent<TetrominoMovement>().rotationPoint;
     }
 }
