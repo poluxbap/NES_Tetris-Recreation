@@ -9,6 +9,7 @@ public class TetrominoMovement : MonoBehaviour
     public float fallTime = .8f;
     public static int width = 10;
     public static int height = 20;
+    public float interval = .1f;
 
     private static Transform[,] _grid = new Transform[width, height];
 
@@ -54,7 +55,7 @@ public class TetrominoMovement : MonoBehaviour
             {
                 if (GameEnded())
                 {
-                   FindObjectOfType<LoseScreen>().CloseBlinds();
+                    FindObjectOfType<LoseScreen>().CloseBlinds();
                     this.enabled = false;
                 }
                 else
@@ -77,8 +78,8 @@ public class TetrominoMovement : MonoBehaviour
         {
             if(HasLine(i))
             {
-                DeleteLine(i);
-                RowDown(i);
+                GameManager.Instance.AddLines(1);
+                StartCoroutine(DeleteLine(i));
             }
         }
     }
@@ -96,13 +97,29 @@ public class TetrominoMovement : MonoBehaviour
         return true;
     }
 
-    private void DeleteLine(int i)
+    private IEnumerator DeleteLine(int i)
     {
         for (int j = 0; j < width; j++)
         {
-            Destroy(_grid[j, i].gameObject);
-            _grid[j, i] = null;
+            StartCoroutine(DelayForDelete(i, j));
         }
+
+        yield return new WaitForSeconds(interval * (width / 2));
+        RowDown(i);
+    }
+    private IEnumerator DelayForDelete(int i, int j)
+    {
+        if (j >= width / 2)
+        {
+            yield return new WaitForSeconds(interval * (j - width / 2));
+        }
+        else
+        {
+            yield return new WaitForSeconds(interval * (-j + width / 2));
+        }
+
+        Destroy(_grid[j, i].gameObject);
+        _grid[j, i] = null;
     }
 
     private void RowDown(int i)

@@ -6,7 +6,6 @@ public class Spawn : MonoBehaviour
 {
     public List<GameObject> tetrominoes;
     public Transform previewPosition;
-    public SO_TetrominoCount statistics;
 
     private int _nextTetromino;
     private GameObject _previewTetromino;
@@ -21,7 +20,7 @@ public class Spawn : MonoBehaviour
     {
         Instantiate(tetrominoes[_nextTetromino], transform.position, Quaternion.identity);
 
-        statistics.tetrominosList[_nextTetromino]++;
+        GameManager.Instance.AddStatistics(1, _nextTetromino);
 
         PreviewTetromino();
     }

@@ -133,6 +133,7 @@ MonoBehaviour:
   rotationPoint: {x: 0, y: 0, z: 0}
   previusTime: 0
   fallTime: 0.8
+  gameInfo: {fileID: 11400000, guid: a2b147abe1b9ba74e845a68deb54673a, type: 2}
 --- !u!1 &4667639009015598524
 GameObject:
   m_ObjectHideFlags: 0
