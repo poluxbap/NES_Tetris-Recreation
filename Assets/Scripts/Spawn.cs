@@ -21,6 +21,7 @@ public class Spawn : MonoBehaviour
         Instantiate(tetrominoes[_nextTetromino], transform.position, Quaternion.identity);
 
         GameManager.Instance.AddStatistics(1, _nextTetromino);
+        GameManager.Instance.AddScore(4);
 
         PreviewTetromino();
     }

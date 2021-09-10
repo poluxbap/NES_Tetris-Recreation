@@ -11,6 +11,7 @@ public class TetrominoMovement : MonoBehaviour
     public static int height = 20;
     public float interval = .1f;
 
+    private int _amountLines;
     private static Transform[,] _grid = new Transform[width, height];
 
     void Update()
@@ -56,6 +57,11 @@ public class TetrominoMovement : MonoBehaviour
                 if (GameEnded())
                 {
                     FindObjectOfType<LoseScreen>().CloseBlinds();
+
+                    if(GameManager.Instance.score > PlayerPrefs.GetInt("topScore", 0))
+                    {
+                        PlayerPrefs.SetInt("topScore", GameManager.Instance.score);
+                    }
                     this.enabled = false;
                 }
                 else
@@ -74,13 +80,35 @@ public class TetrominoMovement : MonoBehaviour
 
     private void CheckForLines()
     {
+        _amountLines = 0;
+
         for(int i = height - 1; i >= 0; i--)
         {
             if(HasLine(i))
             {
+                _amountLines++;
                 GameManager.Instance.AddLines(1);
                 StartCoroutine(DeleteLine(i));
             }
+        }
+
+        GameManager.Instance.AddScore(ScoreAmount(_amountLines));
+    }
+
+    public int ScoreAmount(int lines)
+    {
+        switch(lines)
+        {
+            case 1:
+                return 40;
+            case 2:
+                return 100;
+            case 3:
+                return 300;
+            case 4:
+                return 1200;
+            default:
+                return 0;
         }
     }
 

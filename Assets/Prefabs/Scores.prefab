@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 25826923712462570}
+  - component: {fileID: 1949042105563398111}
   m_Layer: 0
   m_Name: Scores
   m_TagString: Untagged
@@ -36,6 +37,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1949042105563398111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25826923712462573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a9461ea825d5e4195a87def729955a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites: []
+  numbers:
+  - {fileID: 5627955226384544004, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -1324919663571051280, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -1047131934810524129, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -588053801697521082, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: 5888035190407105190, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -4697271990651462613, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: 8599333637489430148, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -5782045863040457845, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -1458561635085358286, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: 821772219421972007, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
 --- !u!1 &25826923989764009
 GameObject:
   m_ObjectHideFlags: 0
