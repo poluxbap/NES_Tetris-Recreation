@@ -23,6 +23,10 @@ public class TetrominoMovement : MonoBehaviour
             {
                 transform.position += new Vector3(1, 0, 0);
             }
+            else
+            {
+                SoundManager.Instance.Play(Sounds.SoundName.TetrominoMove);
+            }
         }
         else if(Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -30,6 +34,10 @@ public class TetrominoMovement : MonoBehaviour
             if (!ValidMove())
             {
                 transform.position += new Vector3(-1, 0, 0);
+            }
+            else
+            {
+                SoundManager.Instance.Play(Sounds.SoundName.TetrominoMove);
             }
         }
         else if(Input.GetKeyDown(KeyCode.Z))
@@ -39,6 +47,10 @@ public class TetrominoMovement : MonoBehaviour
             {
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
             }
+            else
+            {
+                SoundManager.Instance.Play(Sounds.SoundName.TetrominoRotate);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
@@ -46,6 +58,10 @@ public class TetrominoMovement : MonoBehaviour
             if (!ValidMove())
             {
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
+            }
+            else
+            {
+                SoundManager.Instance.Play(Sounds.SoundName.TetrominoRotate);
             }
         }
 
@@ -56,6 +72,8 @@ public class TetrominoMovement : MonoBehaviour
             {
                 if (GameEnded())
                 {
+                    SoundManager.Instance.Play(Sounds.SoundName.Loose);
+
                     FindObjectOfType<LoseScreen>().CloseBlinds();
 
                     if(GameManager.Instance.score > PlayerPrefs.GetInt("topScore", 0))
@@ -66,6 +84,8 @@ public class TetrominoMovement : MonoBehaviour
                 }
                 else
                 {
+                    SoundManager.Instance.Play(Sounds.SoundName.TetrominoLand);
+                    
                     FindObjectOfType<Spawn>().NewTetromino();
                     transform.position += new Vector3(0, 1, 0);
                     this.enabled = false;
@@ -90,6 +110,14 @@ public class TetrominoMovement : MonoBehaviour
                 GameManager.Instance.AddLines(1);
                 StartCoroutine(DeleteLine(i));
             }
+        }
+
+        if(_amountLines > 0)
+        {
+            if (_amountLines == 4)
+                SoundManager.Instance.Play(Sounds.SoundName.TetrisClear);
+            else
+                SoundManager.Instance.Play(Sounds.SoundName.Clear);
         }
 
         GameManager.Instance.AddScore(ScoreAmount(_amountLines));
@@ -135,6 +163,7 @@ public class TetrominoMovement : MonoBehaviour
         yield return new WaitForSeconds(interval * (width / 2));
         RowDown(i);
     }
+
     private IEnumerator DelayForDelete(int i, int j)
     {
         if (j >= width / 2)

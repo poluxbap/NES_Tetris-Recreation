@@ -213,7 +213,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites: []
-  numbers: []
+  numbers:
+  - {fileID: 5627955226384544004, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -1324919663571051280, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -1047131934810524129, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -588053801697521082, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: 5888035190407105190, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -4697271990651462613, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: 8599333637489430148, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -5782045863040457845, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: -1458561635085358286, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
+  - {fileID: 821772219421972007, guid: 94b4510fb05f2274e92438f23da4e59a, type: 3}
 --- !u!1 &4953254179115110915
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,10 +10,7 @@ public class NumbersManager : MonoBehaviour
     private void Awake()
     {
         sprites = new SpriteRenderer[transform.childCount];
-    }
 
-    private void Start()
-    {
         for (int i = 0; i < transform.childCount; i++)
         {
             sprites[i] = transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
